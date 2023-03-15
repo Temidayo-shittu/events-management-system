@@ -1,0 +1,7 @@
+{
+    "jwtPrivateKey": "events_jwtPrivateKey",
+    "EMAIL_USERNAME": "9f3c9fea2c5d84",
+    "EMAIL_PASSWORD": "0173b2af7ef1d9",
+    "EMAIL_HOST": "sandbox.smtp.mailtrap.io",
+    "EMAIL_PORT": "25"
+}
