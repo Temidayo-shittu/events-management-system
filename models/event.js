@@ -23,6 +23,9 @@ const eventSchema= new mongoose.Schema({
     required: true,
     minlength: 5,
     maxlength: 255
+  },
+  status:{
+    type: String
   }
 
 })

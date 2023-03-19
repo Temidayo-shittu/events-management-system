@@ -5,10 +5,10 @@ const mongoose= require('mongoose')
 const express= require('express');
 const router= express.Router();
 
-const VerifyToken = require('../auth/VerifyToken.js');
+const VerifyToken = require('../middleware/VerifyToken.js');
 
 //FOR GETTING A GENERAL ATTENDEE OVERVIEW
-router.get('/', async (req,res)=>{
+router.get('/', VerifyToken, async (req,res)=>{
     const attendees= await Attendee.find().sort('fullName').populate('eventId','name')
     res.send(attendees)
 })

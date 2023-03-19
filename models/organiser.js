@@ -1,29 +1,37 @@
 const Joi = require("joi");
 const mongoose = require("mongoose");
+const jwt= require('jsonwebtoken')
+const config = require('../config/custom-environment-variables.json')
 
-
-
-const Organiser = mongoose.model("Organiser",new mongoose.Schema({
-    name: {
+const organiserSchema= new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 50
+  },
+  email: {
       type: String,
       required: true,
       minlength: 5,
-      maxlength: 50
-    },
-    email: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 255,
-        unique: true
-    },
-    password: {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 1024
-    }
-  }));
+      maxlength: 255,
+      unique: true
+  },
+  password: {
+      type: String,
+      required: true,
+      minlength: 5,
+      maxlength: 1024
+  },
+   isAdmin: Boolean
+})
+
+organiserSchema.methods.generateAuthToken= function(){
+  const token = jwt.sign({ _id: this._id, isAdmin: this.isAdmin }, config.jwtPrivateKey, {expiresIn: 86400})
+    return token
+}
+
+const Organiser = mongoose.model("Organiser",organiserSchema);
 
 function validateOrganiser(organiser) {
   const schema = {

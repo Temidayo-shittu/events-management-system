@@ -26,13 +26,7 @@ router.post("/", async (req, res) => {
   );
   if (!validPassword) return res.status(400).send("Invalid email or password");
 
- const token = jwt.sign(
-    { _id: organiser._id }, 
-    config.jwtPrivateKey, 
-    { expiresIn: 86400}
-    )
-
-
+ const token = organiser.generateAuthToken()
     res.json({token})
     /*
     const message= `You have been successfully logged in as an organiser!!Here is your token: ${token}`
