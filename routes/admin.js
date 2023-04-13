@@ -5,7 +5,6 @@ const mongoose= require('mongoose')
 const express= require('express');
 const router= express.Router()
 const VerifyToken = require('../middleware/VerifyToken.js');
-// const VerifyToken = require('../middleware/VerifyToken.js');
 const validateObjectId= require('../middleware/validateObjectId')
 const { Attendee } = require('../models/attendee');
 const admin = require('../middleware/admin');
